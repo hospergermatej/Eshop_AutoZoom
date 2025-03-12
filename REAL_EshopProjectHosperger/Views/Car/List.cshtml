@@ -1,0 +1,57 @@
+﻿@using REAL_EshopProjectHosperger.Models.Car;
+@model List<CarViewModel>
+@{
+    ViewData["Title"] = "Genre";
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-@TempData["MessageType"] mt-2">
+        @TempData["Message"]
+    </div>
+}
+<div class="mt-2">
+    @if (ViewBag.Role == "admin")
+    {
+        <a class="btn btn-sm btn-success me-1" asp-controller="Car" asp-action="Add">
+            Add
+        </a>
+    }
+    <a class="btn btn-sm btn-dark" asp-controller="Genre" asp-action="List">
+        Reload
+    </a>
+</div>
+
+<
+<table class="table table-hover table-sm text-center mt-2 mb-2">
+    <thead class="table-light">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            @if (ViewBag.Role == "admin")
+            {
+                <th>Actions</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (CarViewModel cars in Model)
+        {
+            <tr>
+                <td>@cars.ID</td>
+                <td><a class="btn-dark" asp-controller="Car" asp-action="List" asp-route-genreid="@cars.ID">>@cars.Brand</a></td>
+                @if (ViewBag.Role == "admin")
+                {
+                    <td>
+                        <a class="btn btn-sm btn-warning me-1" asp-controller="Car" asp-action="Edit" asp-route-id="@cars.ID">
+                            Edit
+                        </a>
+                        <a class="btn btn-sm btn-danger" asp-controller="Car" asp-action="DeleteAction" asp-route-id="@cars.ID">
+                            Delete
+                        </a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
