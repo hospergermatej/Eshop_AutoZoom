@@ -24,7 +24,7 @@ namespace REAL_EshopProjectHosperger.Controllers
             List<Car> cars = _context.Cars.ToList();
 
             List<CarViewModel> carViewModels = cars.Select(c =>
-            new CarViewModel(c.ID, c.Brand, c.Model, c.Description, c.Year, c.Price))
+            new CarViewModel(c.ID, c.Brand, c.Model, c.Description!, c.Year,c.Price))
                 .ToList();
             
             
@@ -32,6 +32,14 @@ namespace REAL_EshopProjectHosperger.Controllers
 
 
             return View(carViewModels);
+        }
+
+        public IActionResult Add()
+        {
+
+
+
+            return View(new CarViewModel());
         }
     }
 }

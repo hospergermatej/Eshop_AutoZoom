@@ -11,6 +11,11 @@
     </div>
 }
 
+<div>
+    <h1 style="text-align:center; font:500; font-size:xx-large; margin-bottom:20px;">Registrace</h1>
+
+</div>
+
 <form asp-action="Register" class="mt-2 mb-2">
     <div class="row justify-content-center mb-2">
         <label asp-for="Username" class="col-sm-1 col-form-label">Username</label>
@@ -47,6 +52,7 @@
             <span asp-validation-for="Email" class="text-danger xinvalid-feedback"></span>
         </div>
     </div>
+    
     <div class="row justify-content-center mb-2">
         <div class="col-5">
             <button type="submit" class="btn btn-sm btn-primary w-100">
@@ -54,4 +60,8 @@
             </button>
         </div>
     </div>
+    
 </form>
+<div>
+    <p style="align-content:center; font:300;">Už máte svůj účet? <a href="/Auth/Login">Login</a></p>
+</div>

@@ -38,6 +38,7 @@ namespace REAL_EshopProjectHosperger.Controllers
             }
 
             HttpContext.Session.SetString("User", account.Username);
+            HttpContext.Session.SetString("Role", account.Role);
             
 
             return RedirectToAction("Index", "Home");
@@ -72,8 +73,8 @@ namespace REAL_EshopProjectHosperger.Controllers
 
             TempData["Message"] = "Account created successfully!";
             TempData["MessageType"] = "success";
-
-            return RedirectToAction("Index","Home");
+            return View(new RegisterViewModel());
+            
         }
 
         public IActionResult Logout()

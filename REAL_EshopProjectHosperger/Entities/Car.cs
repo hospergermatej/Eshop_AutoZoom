@@ -20,6 +20,7 @@ namespace REAL_EshopProjectHosperger.Entities
         public decimal Price { get; set; }
 
 
+
         public string PriceText => $"{Price:N0} CZK";
         public Car()
         {
@@ -29,6 +30,7 @@ namespace REAL_EshopProjectHosperger.Entities
             Description = string.Empty;
             Year = 0;
             Price = 0;
+            
         }
 
         public Car(int id, string brand, string model, string? description, int year, decimal price)
@@ -38,6 +40,7 @@ namespace REAL_EshopProjectHosperger.Entities
             Model = model;
             Description = description;
             Year = year;
+            
             Price = price;
         }
     }

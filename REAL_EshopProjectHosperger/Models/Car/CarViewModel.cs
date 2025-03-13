@@ -15,6 +15,8 @@ namespace REAL_EshopProjectHosperger.Models.Car
 
         public string PriceText => $"{Price:N0} CZK";
 
+       
+
 
 
 

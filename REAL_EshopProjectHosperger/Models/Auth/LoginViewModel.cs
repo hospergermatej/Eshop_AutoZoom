@@ -11,12 +11,15 @@ namespace REAL_EshopProjectHosperger.Models.Auth
         [Required]
         [MaxLength(128)]
         public string Password { get; set; }
+        
+        
 
 
         public LoginViewModel()
         {
             Username = string.Empty;
             Password = string.Empty;
+            
         }
     }
 }
