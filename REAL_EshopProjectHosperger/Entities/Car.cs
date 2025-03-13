@@ -18,6 +18,9 @@ namespace REAL_EshopProjectHosperger.Entities
         public int Year { get; set; }
         [Column("price")]
         public decimal Price { get; set; }
+
+
+        public string PriceText => $"{Price:N0} CZK";
         public Car()
         {
             ID = 0;

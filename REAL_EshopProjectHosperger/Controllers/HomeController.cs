@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace REAL_EshopProjectHosperger.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 

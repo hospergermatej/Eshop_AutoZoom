@@ -7,7 +7,7 @@ using REAL_EshopProjectHosperger.Models.Auth;
 
 namespace REAL_EshopProjectHosperger.Controllers
 {
-    public class AuthController : Controller
+    public class AuthController : BaseController
     {
         private DatabaseContext _context;
 
@@ -41,6 +41,11 @@ namespace REAL_EshopProjectHosperger.Controllers
             
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Register()
+        {
+            return View(new RegisterViewModel());
         }
 
         [HttpPost]

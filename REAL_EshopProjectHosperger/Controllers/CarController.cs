@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace REAL_EshopProjectHosperger.Controllers
 {
-    public class CarController : Controller
+    public class CarController : BaseController
     {
         private DatabaseContext _context;
         private IWebHostEnvironment _webHostEnvironment;
@@ -31,7 +31,7 @@ namespace REAL_EshopProjectHosperger.Controllers
 
 
 
-            return View(carViewModel);
+            return View(carViewModels);
         }
     }
 }

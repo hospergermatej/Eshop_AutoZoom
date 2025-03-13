@@ -17,17 +17,20 @@
             Add
         </a>
     }
-    <a class="btn btn-sm btn-dark" asp-controller="Genre" asp-action="List">
+    <a class="btn btn-sm btn-dark" asp-controller="Car" asp-action="List">
         Reload
     </a>
 </div>
 
-<
+
 <table class="table table-hover table-sm text-center mt-2 mb-2">
     <thead class="table-light">
         <tr>
-            <th>ID</th>
-            <th>Name</th>
+            <th>Photo</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Price</th>
             @if (ViewBag.Role == "admin")
             {
                 <th>Actions</th>
@@ -37,16 +40,19 @@
     <tbody>
         @foreach (CarViewModel cars in Model)
         {
-            <tr>
-                <td>@cars.ID</td>
-                <td><a class="btn-dark" asp-controller="Car" asp-action="List" asp-route-genreid="@cars.ID">>@cars.Brand</a></td>
+            <tr style="text-align:center">
+                <td ><img src="/img/cars/@(cars.ID).png" alt="@cars.Brand" style="height: 125px; margin:5px; text-align:center " /></td>
+                <td style="text-align:center"><a asp-controller="Car" asp-action="List" asp-route-genreid="@cars.ID">@cars.Brand</a></td>
+                <td style="text-align:center">@cars.Model</td>
+                <td style="text-align:center">@cars.Year</td>
+                <td style="text-align:center">@cars.PriceText</td>
                 @if (ViewBag.Role == "admin")
                 {
                     <td>
-                        <a class="btn btn-sm btn-warning me-1" asp-controller="Car" asp-action="Edit" asp-route-id="@cars.ID">
+                        <a class="btn btn-sm btn-warning me-1" asp-controller="Car" asp-action="Edit" asp-route-id="@cars.ID" style="text-align:center">
                             Edit
                         </a>
-                        <a class="btn btn-sm btn-danger" asp-controller="Car" asp-action="DeleteAction" asp-route-id="@cars.ID">
+                        <a class="btn btn-sm btn-danger" asp-controller="Car" asp-action="DeleteAction" asp-route-id="@cars.ID" style="text-align:center">
                             Delete
                         </a>
                     </td>

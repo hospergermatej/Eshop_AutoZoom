@@ -13,7 +13,9 @@ namespace REAL_EshopProjectHosperger.Models.Car
         public int Year { get; set; }
         public decimal Price { get; set; }
 
-        
+        public string PriceText => $"{Price:N0} CZK";
+
+
 
 
         public CarViewModel()
