@@ -32,7 +32,7 @@ namespace REAL_EshopProjectHosperger.Controllers
             Account? account = _context.Accounts.SingleOrDefault(a => a.Username == loginViewModel.Username);
             if (account == null || account.Password != SHA256Helper.HashPassword(loginViewModel.Password))
             {
-                TempData["Message"] = "Wrong username or password!";
+                TempData["Message"] = "Špatný username nebo heslo!";
                 TempData["MessageType"] = "danger";
                 return View(loginViewModel);
             }
@@ -71,7 +71,7 @@ namespace REAL_EshopProjectHosperger.Controllers
             _context.Accounts.Add(newAccount);
             _context.SaveChanges();
 
-            TempData["Message"] = "Account created successfully!";
+            TempData["Message"] = "Účet byl úspěšně vytvořen!";
             TempData["MessageType"] = "success";
             return View(new RegisterViewModel());
             

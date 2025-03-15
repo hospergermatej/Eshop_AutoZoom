@@ -19,9 +19,6 @@ namespace REAL_EshopProjectHosperger.Models.Auth
         [MaxLength(128)]
         public string Lastname { get; set; }
 
-
-        
-
         public string? Email { get; set; }
 
         public RegisterViewModel()
