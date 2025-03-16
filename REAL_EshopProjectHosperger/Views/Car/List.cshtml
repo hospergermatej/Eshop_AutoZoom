@@ -1,7 +1,7 @@
 ﻿@using REAL_EshopProjectHosperger.Models.Car;
 @model List<CarViewModel>
 @{
-    ViewData["Title"] = "Genre";
+    ViewData["Title"] = "List aut";
 }
 
 @if (TempData["Message"] != null)
@@ -38,11 +38,14 @@
         </tr>
     </thead>
     <tbody>
+        
         @foreach (CarViewModel cars in Model)
         {
+            
+            
             <tr style="text-align:center">
-                <td ><img src="/img/cars/@(cars.ID).png" alt="@cars.Brand" style="height: 125px; margin:5px; text-align:center " /></td>
-                <td style="text-align:center"><a asp-controller="Car" asp-action="List" asp-route-genreid="@cars.ID">@cars.Brand</a></td>
+                <td><a asp-controller="Car" asp-action="Detail" asp-route-id="@cars.ID"><img src="/img/cars/@(cars.ID).png" alt="@cars.Brand" style="height: 125px; margin:5px; text-align:center " /></a></td>
+                <td style="text-align:center">@cars.Brand</td>
                 <td style="text-align:center">@cars.Model</td>
                 <td style="text-align:center">@cars.Year</td>
                 <td style="text-align:center">@cars.PriceText</td>
@@ -52,12 +55,15 @@
                         <a class="btn btn-sm btn-warning me-1" asp-controller="Car" asp-action="Edit" asp-route-id="@cars.ID" style="text-align:center">
                             Edit
                         </a>
-                        <a class="btn btn-sm btn-danger" asp-controller="Car" asp-action="DeleteAction" asp-route-id="@cars.ID" style="text-align:center">
+                        <a class="btn btn-sm btn-danger" asp-controller="Car" asp-action="Delete" asp-route-id="@cars.ID" style="text-align:center">
                             Delete
                         </a>
                     </td>
                 }
+                
+
             </tr>
+            
         }
     </tbody>
 </table>

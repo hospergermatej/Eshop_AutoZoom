@@ -1,0 +1,31 @@
+﻿@using REAL_EshopProjectHosperger.Models.Car
+@model CarViewModel
+@{
+    ViewData["Title"] = "Detail";
+    ViewData["Action"] = "Detail";
+}
+@(CarViewModel cars)
+<div>
+    <h1 style="text-align:center; font:500; font-size:xx-large; margin-bottom:20px;">Detail</h1>
+</div>
+
+<div style="display:flex; width:100%;">
+        <div style="display:flex; width:50%;">
+        
+            <img src="/img/cars/@(cars.ID).png" alt="@cars.Brand" style="height: 200px; margin:5px; text-align:center " />
+        
+        </div>
+        <div style ="display:flex; width:50%;">
+
+
+
+        </div>
+</div>
+
+
+    
+    <td style="text-align:center"><a asp-controller="Car" asp-action="List" asp-route-genreid="@cars.ID">@cars.Brand</a></td>
+    <td style="text-align:center">@cars.Model</td>
+    <td style="text-align:center">@cars.Year</td>
+    <td style="text-align:center">@cars.PriceText</td>
+    

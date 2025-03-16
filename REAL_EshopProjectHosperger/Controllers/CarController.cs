@@ -150,7 +150,8 @@ namespace REAL_EshopProjectHosperger.Controllers
                 return View(carViewModel);
             }
 
-            Car? car = _context.Cars.SingleOrDefault(c => c.ID == carViewModel.ID)!;
+            Car? car = _context.Cars.SingleOrDefault(c => c.ID == carViewModel.ID);
+
             if (car == null)
             {
                 TempData["Message"] = "Auto nebylo nalezeno!";
@@ -185,5 +186,53 @@ namespace REAL_EshopProjectHosperger.Controllers
 
             return RedirectToAction("List");
         }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            Car? car = _context.Cars.SingleOrDefault(c => c.ID == id)!;
+
+            if (car==null)
+            {
+                TempData["Message"] = "Auto nebylo nalezeno!";
+                TempData["MessageType"] = "danger";
+                return RedirectToAction("List");
+            }
+
+            _context.Cars.Remove(car);
+            _context.SaveChanges();
+
+            TempData["Message"] = $"Auto značka:{car.Brand} model:{car.Model} bylo úspěšně odstraněn!";
+            TempData["MessageType"] = "success";
+
+            return RedirectToAction("List");
+        }
+
+
+        public IActionResult Detail(int id)
+        {
+            Car? car = _context.Cars.SingleOrDefault(c => c.ID == id)!;
+
+            if (car==null)
+            {
+                TempData["Message"] = "Auto nebylo nalezeno!";
+                TempData["MessageType"] = "danger";
+                return RedirectToAction("List");
+            }
+
+            CarViewModel carViewModel = new CarViewModel(
+                car.ID,
+                car.Brand,
+                car.Model,
+                car.Description!,
+                car.Year,
+                car.Price
+            );
+
+            return View(carViewModel);
+
+        }
     }
+
+   
 }
