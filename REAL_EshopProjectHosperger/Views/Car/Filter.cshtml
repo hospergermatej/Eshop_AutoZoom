@@ -1,5 +1,36 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using REAL_EshopProjectHosperger.Models.Car;
+@model List<CarViewModel>
 @{
+    ViewData["Title"] = "Brands";
+    
 }
+
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-@TempData["MessageType"] mt-2">
+        @TempData["Message"]
+    </div>
+}
+
+<table class="table table-hover table-sm text-center mt-2 mb-2">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Brand</th>
+            
+            @if (ViewBag.Role == "admin")
+            {
+                <th>Actions</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (CarViewModel cars in Model)
+        {
+            <tr>
+                <td>@cars.Brand</td>
+            </tr>
+        }
+    </tbody>
+</table>

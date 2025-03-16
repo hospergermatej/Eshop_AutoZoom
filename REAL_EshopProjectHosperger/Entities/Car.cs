@@ -19,6 +19,10 @@ namespace REAL_EshopProjectHosperger.Entities
         [Column("price")]
         public decimal Price { get; set; }
 
+        [Column("brand_id")]
+        [ForeignKey("Brand")]
+        public int BrandID { get; set; }
+
 
 
         public string PriceText => $"{Price:N0} CZK";

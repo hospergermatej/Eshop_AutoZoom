@@ -2,6 +2,8 @@
 using REAL_EshopProjectHosperger.Models.Car;
 using REAL_EshopProjectHosperger.Entities;
 using Microsoft.AspNetCore.Mvc;
+using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
+using REAL_EshopProjectHosperger.Models.Brand;
 
 namespace REAL_EshopProjectHosperger.Controllers
 {
@@ -33,6 +35,18 @@ namespace REAL_EshopProjectHosperger.Controllers
 
             return View(carViewModels);
         }
+
+        public IActionResult ListID(BrandViewModel brandViewModel)
+        {
+            List<Car> cars = _context.Cars.Where(c => c.ID == brandViewModel.ID).ToList();
+
+            List<CarViewModel> carViewModels = cars.Select(c =>
+                new CarViewModel(c.ID, c.Brand, c.Model, c.Description!, c.Year, c.Price))
+                .ToList();
+
+            return View(carViewModels);
+        }
+
 
         public IActionResult Add()
         {
@@ -128,7 +142,6 @@ namespace REAL_EshopProjectHosperger.Controllers
         [HttpPost]
         public IActionResult Edit(CarViewModel carViewModel)
         {
-            
             if (carViewModel.Image != null)
             {
                 if (carViewModel.Image.Length > 10 * 1024 * 1024)
@@ -138,11 +151,9 @@ namespace REAL_EshopProjectHosperger.Controllers
                 }
                 if (Path.GetExtension(carViewModel.Image.FileName).ToLower() != ".png")
                 {
-
                     ModelState.AddModelError("Image", "Fotka auta musí být ve formátu PNG!");
                     return View(carViewModel);
                 }
-
             }
 
             if (!ModelState.IsValid)
@@ -150,49 +161,56 @@ namespace REAL_EshopProjectHosperger.Controllers
                 return View(carViewModel);
             }
 
-            Car? car = _context.Cars.SingleOrDefault(c => c.ID == carViewModel.ID);
+            Car car = _context.Cars.SingleOrDefault(c => c.ID == carViewModel.ID);
 
             if (car == null)
             {
                 TempData["Message"] = "Auto nebylo nalezeno!";
                 TempData["MessageType"] = "danger";
             }
-
-            car.Brand = carViewModel.Brand;
-            car.Model = carViewModel.Model;
-            car.Description = carViewModel.Description;
-            car.Year = carViewModel.Year;
-            car.Price = carViewModel.Price;
-
-            _context.Cars.Update(car);
-            _context.SaveChanges();
-
-            if(carViewModel.Image != null)
+            else
             {
-                string dirPath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "cars");
+                car.Brand = carViewModel.Brand;
+                car.Model = carViewModel.Model;
+                car.Description = carViewModel.Description;
+                car.Year = carViewModel.Year;
+                car.Price = carViewModel.Price;
 
-                if (!Directory.Exists(dirPath))
+                _context.Cars.Update(car);
+                _context.SaveChanges();
+
+                if (carViewModel.Image != null)
                 {
-                    Directory.CreateDirectory(dirPath);
+                    string dirPath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "cars");
+
+                    if (!Directory.Exists(dirPath))
+                    {
+                        Directory.CreateDirectory(dirPath);
+                    }
+
+                    string filePath = Path.Combine(dirPath, $"{car.ID}.png");
+                    using FileStream fileStream = new FileStream(filePath, FileMode.Create);
+                    carViewModel.Image.CopyTo(fileStream);
                 }
 
-                string filePath = Path.Combine(dirPath, $"{car.ID}.png");
-                using FileStream fileStream = new FileStream(filePath, FileMode.Create);
-                carViewModel.Image.CopyTo(fileStream);
+                TempData["Message"] = $"Auto značka:{car.Brand} model:{car.Model} bylo úspěšně editováno!";
+                TempData["MessageType"] = "success";
             }
 
-            TempData["Message"] = $"Auto značka:{car.Brand} model:{car.Model} bylo úspěšně editováno!";
-            TempData["MessageType"] = "success";
+            List<Car> cars = _context.Cars.ToList();
+            List<CarViewModel> carViewModels = cars.Select(c =>
+                new CarViewModel(c.ID, c.Brand, c.Model, c.Description!, c.Year, c.Price))
+                .ToList();
 
-            return RedirectToAction("List");
+            return View("List", carViewModels);
         }
 
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            Car? car = _context.Cars.SingleOrDefault(c => c.ID == id)!;
+            Car car = _context.Cars.SingleOrDefault(c => c.ID == id);
 
-            if (car==null)
+            if (car == null)
             {
                 TempData["Message"] = "Auto nebylo nalezeno!";
                 TempData["MessageType"] = "danger";
@@ -202,18 +220,23 @@ namespace REAL_EshopProjectHosperger.Controllers
             _context.Cars.Remove(car);
             _context.SaveChanges();
 
-            TempData["Message"] = $"Auto značka:{car.Brand} model:{car.Model} bylo úspěšně odstraněn!";
+            TempData["Message"] = $"Auto značka:{car.Brand} model:{car.Model} bylo úspěšně odstraněno!";
             TempData["MessageType"] = "success";
 
-            return RedirectToAction("List");
+            List<Car> cars = _context.Cars.ToList();
+            List<CarViewModel> carViewModels = cars.Select(c =>
+                new CarViewModel(c.ID, c.Brand, c.Model, c.Description!, c.Year, c.Price))
+                .ToList();
+
+            return View("List", carViewModels);
         }
 
 
         public IActionResult Detail(int id)
         {
-            Car? car = _context.Cars.SingleOrDefault(c => c.ID == id)!;
+            Car car = _context.Cars.SingleOrDefault(c => c.ID == id);
 
-            if (car==null)
+            if (car == null)
             {
                 TempData["Message"] = "Auto nebylo nalezeno!";
                 TempData["MessageType"] = "danger";
@@ -230,8 +253,39 @@ namespace REAL_EshopProjectHosperger.Controllers
             );
 
             return View(carViewModel);
-
         }
+
+
+        public IActionResult ListOdNejlevnejsich(string brand)
+        {
+            List<Car> cars = _context.Cars.ToList();
+
+            List<CarViewModel> carViewModels = cars.OrderBy(c => c.Price)
+                .Select(c => new CarViewModel(c.ID, c.Brand, c.Model, c.Description!, c.Year, c.Price))
+                .ToList();
+
+
+
+
+
+            return View(carViewModels);
+        }
+        public IActionResult ListOdNejdrazsich(string brand)
+        {
+            List<Car> cars = _context.Cars.ToList();
+
+            List<CarViewModel> carViewModels = cars.OrderByDescending(c => c.Price)
+                .Select(c => new CarViewModel(c.ID, c.Brand, c.Model, c.Description!, c.Year, c.Price))
+                .ToList();
+
+
+
+
+
+            return View(carViewModels);
+        }
+
+
     }
 
    

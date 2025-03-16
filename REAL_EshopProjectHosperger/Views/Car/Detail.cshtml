@@ -1,10 +1,13 @@
-﻿@using REAL_EshopProjectHosperger.Models.Car
-@model CarViewModel
+﻿@using REAL_EshopProjectHosperger.Entities
+@using REAL_EshopProjectHosperger.Models.Car
+@model List<CarViewModel>
 @{
     ViewData["Title"] = "Detail";
     ViewData["Action"] = "Detail";
 }
-@(CarViewModel cars)
+@{
+    var cars = Model.FirstOrDefault();
+}
 <div>
     <h1 style="text-align:center; font:500; font-size:xx-large; margin-bottom:20px;">Detail</h1>
 </div>
@@ -16,9 +19,11 @@
         
         </div>
         <div style ="display:flex; width:50%;">
-
-
-
+            <h3>@(cars.Brand)</h3>
+            <h4>@(cars.Model)</h4>
+            <p>Rok výroby: @(cars.Year)</p>
+            <p>Informace: @(cars.Description)</p>
+            <p>Cena: @(cars.PriceText)</p>
         </div>
 </div>
 

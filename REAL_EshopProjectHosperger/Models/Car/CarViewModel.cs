@@ -1,10 +1,15 @@
-﻿using REAL_EshopProjectHosperger.Entities;
+﻿using REAL_EshopProjectHosperger.Database;
+using REAL_EshopProjectHosperger.Entities;
+using REAL_EshopProjectHosperger.Models.Brand;
 using System.ComponentModel.DataAnnotations;
 
 namespace REAL_EshopProjectHosperger.Models.Car
 {
     public class CarViewModel
     {
+
+        public List<BrandViewModel> Brands { get; set; }
+
         [Required]
         
         public int ID { get; set; }
@@ -28,10 +33,6 @@ namespace REAL_EshopProjectHosperger.Models.Car
         public IFormFile? Image { get; set; }
 
         public string PriceText => $"{Price:N0} CZK";
-
-       
-
-
 
 
         public CarViewModel()

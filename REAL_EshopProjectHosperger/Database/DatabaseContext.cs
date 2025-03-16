@@ -7,6 +7,7 @@ namespace REAL_EshopProjectHosperger.Database
     {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Brand> Brands { get; set; }
         
 
         public DatabaseContext(DbContextOptions options)

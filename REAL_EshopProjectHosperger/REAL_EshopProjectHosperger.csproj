@@ -28,4 +28,8 @@
     <None Include="Views\Car\Detail.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\brands\" />
+  </ItemGroup>
+
 </Project>
