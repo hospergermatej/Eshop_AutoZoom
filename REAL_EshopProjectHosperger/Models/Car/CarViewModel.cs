@@ -8,7 +8,7 @@ namespace REAL_EshopProjectHosperger.Models.Car
     public class CarViewModel
     {
 
-        public List<BrandViewModel> Brands { get; set; }
+        
 
         [Required]
         

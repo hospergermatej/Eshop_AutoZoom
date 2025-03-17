@@ -38,7 +38,7 @@ namespace REAL_EshopProjectHosperger.Controllers
 
         public IActionResult ListID(BrandViewModel brandViewModel)
         {
-            List<Car> cars = _context.Cars.Where(c => c.ID == brandViewModel.ID).ToList();
+            List<Car> cars = _context.Cars.Where(c => c.BrandID == brandViewModel.ID).ToList();
 
             List<CarViewModel> carViewModels = cars.Select(c =>
                 new CarViewModel(c.ID, c.Brand, c.Model, c.Description!, c.Year, c.Price))
