@@ -1,4 +1,5 @@
-﻿using REAL_EshopProjectHosperger.Database;
+﻿using Org.BouncyCastle.Bcpg.Sig;
+using REAL_EshopProjectHosperger.Database;
 using REAL_EshopProjectHosperger.Entities;
 using REAL_EshopProjectHosperger.Models.Brand;
 using System.ComponentModel.DataAnnotations;
@@ -15,12 +16,15 @@ namespace REAL_EshopProjectHosperger.Models.Car
         public int ID { get; set; }
         [Required]
         [MaxLength(64)]
+        [RegularExpression("@^[A-Z][a-zA-Z0-9&\\- ]{1,19}$")]
         public string Brand { get; set; }
         [Required]
         [MaxLength(64)]
+        [RegularExpression("@^[A-Za-z0-9\\- ]{2,30}$")]
         public string Model { get; set; }
         [Required]
         [MaxLength(255)]
+        [RegularExpression("@^[\\w\\d\\s.,!&'’\"()-]{10,500}$")]
         public string Description { get; set; }
         [Required]
         [Range(1900, 2100)]
