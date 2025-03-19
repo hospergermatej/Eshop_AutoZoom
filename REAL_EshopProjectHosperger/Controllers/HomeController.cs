@@ -9,7 +9,7 @@ namespace REAL_EshopProjectHosperger.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(DatabaseContext context) : base() { }
+       
 
         public HomeController(ILogger<HomeController> logger)
         {

@@ -4,6 +4,7 @@ using REAL_EshopProjectHosperger.Entities;
 using Microsoft.AspNetCore.Mvc;
 using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 using REAL_EshopProjectHosperger.Models.Brand;
+using Microsoft.EntityFrameworkCore;
 
 namespace REAL_EshopProjectHosperger.Controllers
 {
@@ -79,7 +80,12 @@ namespace REAL_EshopProjectHosperger.Controllers
                 return View(carViewModel);
             }
 
-
+            
+            
+           
+            
+            
+            
             Car car = new Car(
                 carViewModel.ID,
                 carViewModel.Brand, 
@@ -87,7 +93,10 @@ namespace REAL_EshopProjectHosperger.Controllers
                 carViewModel.Description,
                 carViewModel.Year,
                 carViewModel.Price
+                
             );
+
+            
 
 
             _context.Cars.Add(car);
@@ -265,10 +274,6 @@ namespace REAL_EshopProjectHosperger.Controllers
                 .Select(c => new CarViewModel(c.ID, c.Brand, c.Model, c.Description!, c.Year, c.Price))
                 .ToList();
 
-
-
-
-
             return View(carViewModels);
         }
         public IActionResult ListOdNejdrazsich(string brand)
@@ -279,17 +284,28 @@ namespace REAL_EshopProjectHosperger.Controllers
                 .Select(c => new CarViewModel(c.ID, c.Brand, c.Model, c.Description!, c.Year, c.Price))
                 .ToList();
 
-
-
-
-
             return View(carViewModels);
         }
 
 
-        public IActionResult Search()
+        [HttpPost]
+        public IActionResult Search(string searchTerm)
         {
-            return View();
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                TempData["Message"] = "Zadejte prosím hledaný výraz!";
+                TempData["MessageType"] = "danger";
+
+                return RedirectToAction("List");
+            }
+
+            List<Car> cars = _context.Cars.ToList();
+
+            List<CarViewModel> carViewModels = cars.Where(carViewModels => carViewModels.Brand.Contains(searchTerm) || carViewModels.Model.Contains(searchTerm))
+                .Select(c => new CarViewModel(c.ID, c.Brand, c.Model, c.Description!, c.Year, c.Price))
+                .ToList();
+
+            return View(carViewModels);
         }
 
     }

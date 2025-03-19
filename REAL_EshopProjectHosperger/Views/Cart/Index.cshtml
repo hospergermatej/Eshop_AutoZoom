@@ -1,5 +1,58 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using REAL_EshopProjectHosperger.Models.Car;
+@model List<CarViewModel>
+
+<h1>Košík</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Car Name</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (CarViewModel car in Model)
+        {
+            <tr>
+                <td>@car.Brand @car.Model</td>
+                <td>@car.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Payment Method</h2>
+<select id="paymentMethod">
+    <option value="creditCard">Credit Card</option>
+    <option value="paypal">PayPal</option>
+    <option value="bankTransfer">Bank Transfer</option>
+</select>
+
+<h2>Contact Information</h2>
+<form>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" required>
+
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" name="phone" required>
+
+    <button type="submit">Submit</button>
+</form>
+
+<h2>Total Price: @Model.Sum(car => car.Price)</h2>
+
+<script>
+    function addToCart(carName, price) {
+        // Implement the logic to add the car to the shopping cart
+        // You can use JavaScript or make an AJAX request to the server
+        // to add the car to the cart
+        console.log("Adding car to cart: " + carName + " - Price: " + price);
+    }
+</script>

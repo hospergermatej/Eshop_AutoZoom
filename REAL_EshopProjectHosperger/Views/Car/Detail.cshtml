@@ -1,36 +1,49 @@
 ﻿@using REAL_EshopProjectHosperger.Entities
 @using REAL_EshopProjectHosperger.Models.Car
-@model List<CarViewModel>
+@model CarViewModel
 @{
     ViewData["Title"] = "Detail";
     ViewData["Action"] = "Detail";
 }
-@{
-    var cars = Model.FirstOrDefault();
-}
-<div>
-    <h1 style="text-align:center; font:500; font-size:xx-large; margin-bottom:20px;">Detail</h1>
-</div>
 
-<div style="display:flex; width:100%;">
-        <div style="display:flex; width:50%;">
-        
-            <img src="/img/cars/@(cars.ID).png" alt="@cars.Brand" style="height: 200px; margin:5px; text-align:center " />
-        
+<div class="container">
+    <div class="col">
+        <div>
+            <h1 style="text-align:center; font:500; font-size:xx-large; margin-bottom:20px;">Detail</h1>
+            <form asp-controller="Car" asp-action="List" method="post">
+                <button type="submit" class="btn btn-dark">Zpět</button>
+            </form>
         </div>
-        <div style ="display:flex; width:50%;">
-            <h3>@(cars.Brand)</h3>
-            <h4>@(cars.Model)</h4>
-            <p>Rok výroby: @(cars.Year)</p>
-            <p>Informace: @(cars.Description)</p>
-            <p>Cena: @(cars.PriceText)</p>
+
+        <div class="row">
+            <div class="col-md-6">
+                <img src="@Url.Content("~/img/cars/" + Model.ID + ".png")" alt="@Model.Brand" class="img-fluid" style="margin: 5px auto; display: block;">
+            </div>
+            <div class="col-md-6">
+                <h1>@Model.Brand @Model.Model</h1>
+            
+                <p style="font-size: medium;">Rok výroby: @Model.Year</p>
+                <p style="font-size: medium;">Popis Auta: @Model.Description</p>
+                <br />
+                <br />
+                <p style="font-size:x-large;">Cena: @Model.PriceText</p>
+            </div>
+        
+            
         </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+
+
+            </div>
+            <div class="col-md-6">
+
+                <form action="/" method="post">
+                    <button type="submit" class="btn btn-primary" style="height:50px; width:170px;">Přidat do košíku</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
 </div>
-
-
-    
-    <td style="text-align:center"><a asp-controller="Car" asp-action="List" asp-route-genreid="@cars.ID">@cars.Brand</a></td>
-    <td style="text-align:center">@cars.Model</td>
-    <td style="text-align:center">@cars.Year</td>
-    <td style="text-align:center">@cars.PriceText</td>
-    

@@ -24,9 +24,6 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Filter">Filter</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Brand" asp-action="ListBrand">Brands</a>
                         </li>
                         <li class="nav-item">
@@ -44,7 +41,7 @@
                                 <span class="navbar-text me-3">Logged in as @ViewBag.Username [@ViewBag.Role]</span>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-dark" asp-controller="Car" asp-action="Cart" style="margin-right:10px;">Košík</a>
+                                <a class="btn btn-dark" asp-controller="Cart" asp-action="Index" style="margin-right:10px;">Košík</a>
                             </li>
                             <li class="nav-item">
                                 <a class="btn btn-danger" asp-controller="Auth" asp-action="Logout" style="margin-right:10px;">Logout</a>
@@ -53,7 +50,7 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="btn btn-dark" asp-controller="Car" asp-action="Cart" style="margin-right:10px;">Košík</a>
+                                <a class="btn btn-dark" asp-controller="Cart" asp-action="Index" style="margin-right:10px;">Košík</a>
                             </li>
                             <li class="nav-item">
                                 <a class="btn btn-primary" asp-controller="Auth" asp-action="Login" style="margin-right:10px;">Login</a>
