@@ -26,6 +26,15 @@
     <a class="btn btn-sm btn-dark" asp-controller="Car" asp-action="ListOdNejdrazsich">
         seřadit od nejdražších
     </a>
+    <div>
+        <form asp-controller="Car" asp-action="Search"  method="post">
+            <input type="text" placeholder="Search.." style="margin-left:5px;">
+            <button type="submit"><i class="fa fa-search">Hledat</i></button>
+        </form>
+        
+
+    </div>
+    
     
 </div>
 

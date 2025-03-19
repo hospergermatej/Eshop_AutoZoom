@@ -122,6 +122,7 @@ namespace REAL_EshopProjectHosperger.Controllers
             {
                 TempData["Message"] = "Auto nebylo nalezeno!";
                 TempData["MessageType"] = "danger";
+               return RedirectToAction("List");
             }
 
             CarViewModel carViewModel = new CarViewModel(
@@ -285,6 +286,11 @@ namespace REAL_EshopProjectHosperger.Controllers
             return View(carViewModels);
         }
 
+
+        public IActionResult Search()
+        {
+            return View();
+        }
 
     }
 

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using REAL_EshopProjectHosperger.Database;
 using REAL_EshopProjectHosperger.Models;
 using System.Diagnostics;
 
@@ -7,6 +8,8 @@ namespace REAL_EshopProjectHosperger.Controllers
     public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
+
+        public HomeController(DatabaseContext context) : base() { }
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -28,5 +31,8 @@ namespace REAL_EshopProjectHosperger.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        
+
     }
 }
