@@ -2,12 +2,30 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="d-flex flex-column align-items-center gap-1">
+<div class="d-flex flex-column align-items-center gap-1" >
     <h1 style="font-family:Tahoma;" class="display-4">Vítejte na Eshopu AutoZoom</h1>
-    <p class="btn btn-primary"> <a style="text-decoration:none; color:white;" asp-controller="Car" asp-action="List"> NABÍDKA AUT</a></p>
-    <p class="btn btn-primary row-cols-1"> <a style="text-decoration:none; color:white;" asp-controller="Brand" asp-action="ListBrand"> NAŠE ZNAČKY AUT</a></p>
-    <p class="btn btn-primary row-cols-1"> <a style="text-decoration:none; color:white;" asp-controller="Car" asp-action="List"> KOŠÍK?</a></p>
-    <p class="btn btn-primary row-cols-1"> <a style="text-decoration:none; color:white;" asp-controller="Car" asp-action="Filter"> FILTER?</a></p>
+    
+    <div class="row d-flex gap-3 align-items-center justify-content-center flex-row" >
+
+        <a class="text-decoration-none text-dark col-md-5 d-flex flex-column" asp-controller="Car" asp-action="List" >
+            <div class="border-0 rounded-2 shadow d-flex justify-content-center align-items-center" style="width:300px; height:200px" >
+                <p class="fs-4 fw-bold">NABÍDKA AUT</p>
+            </div>
+        </a>
+
+        <a class="text-decoration-none text-dark col-md-5 d-flex flex-column" asp-controller="Brand" asp-action="ListBrand">
+            <div class="border-0 rounded-2 shadow d-flex justify-content-center align-items-center" style="width:300px; height:200px; background-image:url(/wwwroot/img/logo.png); background-size: cover;">
+                <p class="fs-4 fw-bold">NAŠE ZNAČKY AUT</p>
+            </div>
+        </a>
+
+    </div>
+
+    
+    
+    
+ @*    <p class="btn btn-primary row-cols-1"> <a style="text-decoration:none; color:white;" asp-controller="Car" asp-action="List"> KOŠÍK?</a></p>
+    <p class="btn btn-primary row-cols-1"> <a style="text-decoration:none; color:white;" asp-controller="Car" asp-action="Filter"> FILTER?</a></p> *@
     
 </div>
 
