@@ -8,11 +8,7 @@ namespace REAL_EshopProjectHosperger.Models.Car
 {
     public class CarViewModel
     {
-
-       
-
         [Required]
-        
         public int ID { get; set; }
         [Required]
         [MaxLength(64)]

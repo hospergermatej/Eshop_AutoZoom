@@ -39,8 +39,8 @@
             </div>
             <div class="col-md-6">
 
-                <form action="/" method="post">
-                    <button type="submit" class="btn btn-primary" style="height:50px; width:170px;">Přidat do košíku</button>
+                <form asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.ID" method="post">
+                        <button type="submit" class="btn btn-primary" style="height:50px; width:170px;">Přidat do košíku</button>
                 </form>
 
             </div>

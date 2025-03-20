@@ -33,10 +33,7 @@
                     </ul>
                     <ul class="navbar-nav">
 
-                        
-
-
-                        @if (ViewBag.IsAuthenticated)
+                         @if (ViewBag.IsAuthenticated)
                         {
                             <li class="nav-item d-flex align-items-center">
                                 <span class="navbar-text me-3">Logged in as @ViewBag.Username [@ViewBag.Role]</span>
@@ -56,8 +53,7 @@
                             <li class="nav-item">
                                 <a class="btn btn-primary" asp-controller="Auth" asp-action="Login" style="margin-right:10px;">Přihlásit se</a>
                             </li>
-                        }
-                        
+                        } 
 
                         <li class="nav-item">
                             <a style="color:white;" class="btn btn-info" asp-controller="Auth" asp-action="Register">Registrace</a>

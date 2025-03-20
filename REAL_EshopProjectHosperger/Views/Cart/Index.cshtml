@@ -1,5 +1,7 @@
 ﻿@using REAL_EshopProjectHosperger.Models.Car;
-@model List<CarViewModel>
+@using REAL_EshopProjectHosperger.Models.Cart;
+@model CartViewModel
+
 
 <h1>Košík</h1>
 
@@ -12,13 +14,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (CarViewModel car in Model)
+        @foreach (CarViewModel car in Model.cars)
         {
             <tr>
                 <td>@car.Brand @car.Model</td>
                 <td>@car.Price</td>
             </tr>
-        }
+        }  
     </tbody>
 </table>
 
@@ -46,7 +48,7 @@
     <button type="submit">Submit</button>
 </form>
 
-<h2>Total Price: @Model.Sum(car => car.Price)</h2>
+@* <h2>Total Price: @Model.Sum(car => car.Price)</h2> *@
 
 <script>
     function addToCart(carName, price) {
