@@ -19,15 +19,16 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1, gap-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Brand" asp-action="ListBrand">Brands</a>
+                            <a class="nav-link text-dark" asp-controller="Brand" asp-action="ListBrand">Naše Značky</a>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Car" asp-action="List">Cars</a>
+                            <a class="nav-link text-dark" asp-controller="Car" asp-action="List">Naše Auta</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
@@ -44,7 +45,7 @@
                                 <a class="btn btn-dark" asp-controller="Cart" asp-action="Index" style="margin-right:10px;">Košík</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-danger" asp-controller="Auth" asp-action="Logout" style="margin-right:10px;">Logout</a>
+                                <a class="btn btn-danger" asp-controller="Auth" asp-action="Logout" style="margin-right:10px;">Odhlásit se</a>
                             </li>
                         }
                         else
@@ -53,13 +54,13 @@
                                 <a class="btn btn-dark" asp-controller="Cart" asp-action="Index" style="margin-right:10px;">Košík</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-primary" asp-controller="Auth" asp-action="Login" style="margin-right:10px;">Login</a>
+                                <a class="btn btn-primary" asp-controller="Auth" asp-action="Login" style="margin-right:10px;">Přihlásit se</a>
                             </li>
                         }
                         
 
                         <li class="nav-item">
-                            <a style="color:white;" class="btn btn-info" asp-controller="Auth" asp-action="Register">Register</a>
+                            <a style="color:white;" class="btn btn-info" asp-controller="Auth" asp-action="Register">Registrace</a>
                         </li>
                     </ul>
                 </div>

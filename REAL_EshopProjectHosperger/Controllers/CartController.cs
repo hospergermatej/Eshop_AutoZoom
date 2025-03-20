@@ -20,7 +20,7 @@ namespace REAL_EshopProjectHosperger.Controllers
             List<Car> cars = _context.Cars.ToList(); // Ensure this returns a non-null list
 
             List<CarViewModel> carViewModels = cars.Select(c =>
-            new CarViewModel(c.ID, c.Brand, c.Model, c.Description!, c.Year, c.Price))
+            new CarViewModel(c.ID, c.Brand, c.Model, c.Description, c.Year, c.Price))
                 .ToList();
 
             return View(carViewModels);

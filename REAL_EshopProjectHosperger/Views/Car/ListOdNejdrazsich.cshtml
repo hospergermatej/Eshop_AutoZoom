@@ -26,6 +26,15 @@
     <a class="btn btn-sm btn-dark" asp-controller="Car" asp-action="ListOdNejdrazsich">
         seřadit od nejdražších
     </a>
+    <div class="mt-2">
+        <form asp-controller="Car" asp-action="Search" method="post">
+            <input type="text" placeholder="Hledejte...">
+            <button type="submit"><i class="fa fa-search">Hledat</i></button>
+        </form>
+
+
+    </div>
+
 
 </div>
 
@@ -33,14 +42,14 @@
 <table class="table table-hover table-sm text-center mt-2 mb-2">
     <thead class="table-light">
         <tr>
-            <th>Photo</th>
-            <th>Brand</th>
+            <th>Fotografie</th>
+            <th>Značka</th>
             <th>Model</th>
-            <th>Year</th>
-            <th>Price</th>
+            <th>Rok výroby</th>
+            <th>Cena</th>
             @if (ViewBag.Role == "admin")
             {
-                <th>Actions</th>
+                <th>Akce</th>
             }
         </tr>
     </thead>
@@ -59,12 +68,12 @@
                     <td>
                         <a class="btn btn-sm btn-warning me-1" asp-controller="Car" asp-action="Edit" asp-route-id="@cars.ID" style="text-align:center">
                             <button class="btn btn-sm btn-warning me-1" onclick="location.href='@Url.Action("Edit", "Car", cars.ID)'" style="text-align:center">
-                                Edit
+                                Editovat
                             </button>
                         </a>
                         <form asp-controller="Car" asp-action="Delete" asp-route-id="@cars.ID" style="display:inline">
                             <button type="submit" class="btn btn-sm btn-danger" style="text-align:center">
-                                Delete
+                                Smazat
                             </button>
                         </form>
                     </td>

@@ -81,11 +81,6 @@ namespace REAL_EshopProjectHosperger.Controllers
             }
 
             
-            
-           
-            
-            
-            
             Car car = new Car(
                 carViewModel.ID,
                 carViewModel.Brand, 
@@ -96,24 +91,27 @@ namespace REAL_EshopProjectHosperger.Controllers
                 
             );
 
-            
-
-
             _context.Cars.Add(car);
             _context.SaveChanges();
 
-            if(carViewModel.Image != null)
+            string dirPath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "cars");
+
+            if (!Directory.Exists(dirPath))
             {
-                string dirPath = Path.Combine(_webHostEnvironment.WebRootPath,"img","cars");
+                Directory.CreateDirectory(dirPath);
+            }
 
-                if(!Directory.Exists(dirPath))
-                {
-                    Directory.CreateDirectory(dirPath);
-                }
+            string filePath = Path.Combine(dirPath, $"{car.ID}.png");
 
-                string filePath = Path.Combine(dirPath, $"{car.ID}.png");
-                using FileStream fileStream = new FileStream(filePath,FileMode.Create);
+            if (carViewModel.Image != null)
+            {
+                using FileStream fileStream = new FileStream(filePath, FileMode.Create);
                 carViewModel.Image.CopyTo(fileStream);
+            }
+            else
+            {
+                string defaultImagePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "no_photo.png");
+                System.IO.File.Copy(defaultImagePath, filePath, true);
             }
 
             TempData["Message"] = $"Auto značka:{car.Brand} model:{car.Model} bylo úspěšně přidáno!";
@@ -125,13 +123,13 @@ namespace REAL_EshopProjectHosperger.Controllers
 
         public IActionResult Edit(int id)
         {
-            Car car = _context.Cars.SingleOrDefault(c => c.ID == id)!;
+            Car car = _context.Cars.SingleOrDefault(c => c.ID == id);
 
-            if (car==null)
+            if (car == null)
             {
                 TempData["Message"] = "Auto nebylo nalezeno!";
                 TempData["MessageType"] = "danger";
-               return RedirectToAction("List");
+                return RedirectToAction("List");
             }
 
             CarViewModel carViewModel = new CarViewModel(
@@ -142,8 +140,6 @@ namespace REAL_EshopProjectHosperger.Controllers
                 car.Year,
                 car.Price
             );
-
-
 
             return View(carViewModel);
         }
@@ -178,34 +174,40 @@ namespace REAL_EshopProjectHosperger.Controllers
                 TempData["Message"] = "Auto nebylo nalezeno!";
                 TempData["MessageType"] = "danger";
             }
-            else
-            {
+            
+           
                 car.Brand = carViewModel.Brand;
                 car.Model = carViewModel.Model;
                 car.Description = carViewModel.Description;
                 car.Year = carViewModel.Year;
                 car.Price = carViewModel.Price;
+            
+            string dirPath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "cars");
 
-                _context.Cars.Update(car);
+            if (!Directory.Exists(dirPath))
+            {
+                Directory.CreateDirectory(dirPath);
+            }
+
+            string filePath = Path.Combine(dirPath, $"{car.ID}.png");
+
+            if (carViewModel.Image != null)
+            {
+                using FileStream fileStream = new FileStream(filePath, FileMode.Create);
+                carViewModel.Image.CopyTo(fileStream);
+            }
+            else
+            {
+                string defaultImagePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "no_photo.png");
+                System.IO.File.Copy(defaultImagePath, filePath, true);
+            }
+
+            _context.Cars.Update(car);
                 _context.SaveChanges();
-
-                if (carViewModel.Image != null)
-                {
-                    string dirPath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "cars");
-
-                    if (!Directory.Exists(dirPath))
-                    {
-                        Directory.CreateDirectory(dirPath);
-                    }
-
-                    string filePath = Path.Combine(dirPath, $"{car.ID}.png");
-                    using FileStream fileStream = new FileStream(filePath, FileMode.Create);
-                    carViewModel.Image.CopyTo(fileStream);
-                }
 
                 TempData["Message"] = $"Auto značka:{car.Brand} model:{car.Model} bylo úspěšně editováno!";
                 TempData["MessageType"] = "success";
-            }
+            
 
             List<Car> cars = _context.Cars.ToList();
             List<CarViewModel> carViewModels = cars.Select(c =>
@@ -214,6 +216,7 @@ namespace REAL_EshopProjectHosperger.Controllers
 
             return View("List", carViewModels);
         }
+
 
         [HttpPost]
         public IActionResult Delete(int id)
