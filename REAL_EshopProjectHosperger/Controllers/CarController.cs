@@ -304,7 +304,7 @@ namespace REAL_EshopProjectHosperger.Controllers
             searchTerm = searchTerm.ToLower();
 
             var cars = await _context.Cars
-                .Where(c => c.Brand.ToLower().Contains(searchTerm) || c.Model.ToLower().Contains(searchTerm))
+                .Where(c => c.Brand.ToLower().Contains(searchTerm) || c.Model.ToLower().Contains(searchTerm)||c.Year.ToString().Contains(searchTerm))
                 .Select(c => new CarViewModel(c.ID, c.Brand, c.Model, c.Description!, c.Year, c.Price))
                 .ToListAsync();
 
