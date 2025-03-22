@@ -10,32 +10,33 @@
         @TempData["Message"]
     </div>
 }
-<div class="mt-2">
-    @if (ViewBag.Role == "admin")
-    {
-        <a class="btn btn-sm btn-success me-1" asp-controller="Car" asp-action="Add">
-            Přidat
+<div class="d-flex justify-content-between">
+    <div class="mt-2 ">
+        @if (ViewBag.Role == "admin")
+        {
+            <a class="btn  btn-success me-1" asp-controller="Car" asp-action="Add">
+                Přidat
+            </a>
+        }
+        <a class="btn  btn-secondary" asp-controller="Car" asp-action="List">
+            Resetovat
         </a>
-    }
-    <a class="btn btn-sm btn-dark" asp-controller="Car" asp-action="List">
-        Resetovat
-    </a>
-    <a class="btn btn-sm btn-dark" asp-controller="Car" asp-action="ListOdNejlevnejsich">
-        seřadit od nejlevnějších
-    </a>
-    <a class="btn btn-sm btn-dark" asp-controller="Car" asp-action="ListOdNejdrazsich">
-        seřadit od nejdražších
-    </a>
-    <div class="mt-2">
-        <form asp-controller="Car" asp-action="Search"  method="post">
-            <input type="text" placeholder="Hledejte..." >
-            <button type="submit"><i class="fa fa-search">Hledat</i></button>
-        </form>
-        
-
+        <a class="btn btn-secondary" asp-controller="Car" asp-action="ListOdNejlevnejsich">
+            seřadit od nejlevnějších
+        </a>
+        <a class="btn btn-secondary" asp-controller="Car" asp-action="ListOdNejdrazsich">
+            seřadit od nejdražších
+        </a>
+    
+    
+    
     </div>
-    
-    
+    <div class="mt-2">
+        <form asp-controller="Car" asp-action="Search" method="post">
+            <input type="text" name="searchTerm" placeholder="Hledejte..." />
+            <button type="submit" class="btn btn-dark"> Hledat</button>
+        </form>
+    </div>
 </div>
 
 

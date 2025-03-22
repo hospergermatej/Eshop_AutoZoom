@@ -8,13 +8,19 @@
 
 <h1 style="text-align:center">Naše Značky Aut</h1>
 
-<div style="display:grid; grid-template-columns: 1fr 1fr;margin-top:10px;">
+
+<div>
+    <a asp-controller="Car" asp-action="List" class="btn btn-primary">Zpět na seznam aut</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary ">Domovská stránka</a>
+</div>
+<div style="display:grid; grid-template-columns: 1fr 1fr;margin-top:20px;">
     
     @foreach (BrandViewModel brands in Model)
     {
 
         <div style="text-align:center;">
-            <div><a asp-controller="Car" asp-action="ListID" asp-route-id="@brands.ID"><img src="/img/brands/@(brands.ID).png" alt="@brands.Brand_" style="height: 100px; margin:5px; text-align:center " /></a></div>
+            <div><a asp-controller="Car" asp-action="ListID" asp-route-id="@brands.ID"><img src="/img/brands/@(brands.ID).png" alt="@brands.Brand_" style="height: 100px; margin:15px; text-align:center " /></a></div>
+            <div style="text-align:center;" class="fw-bold">@brands.Brand_</div>
         </div>
     }
 
@@ -24,15 +30,3 @@
 
 
 
-<table class="table table-hover table-sm text-center mt-2 mb-2">
-    <thead class="table-light">
-        <tr>
-            <th>Značky aut</th>
-        </tr>
-    </thead>
-    
-    <tbody>
-
-        
-    </tbody>
-</table>

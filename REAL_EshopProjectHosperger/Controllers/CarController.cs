@@ -292,23 +292,23 @@ namespace REAL_EshopProjectHosperger.Controllers
 
 
         [HttpPost]
-        public IActionResult Search(string searchTerm)
+        public async Task<IActionResult> Search(string searchTerm)
         {
             if (string.IsNullOrEmpty(searchTerm))
             {
                 TempData["Message"] = "Zadejte prosím hledaný výraz!";
                 TempData["MessageType"] = "danger";
-
                 return RedirectToAction("List");
             }
 
-            List<Car> cars = _context.Cars.ToList();
+            searchTerm = searchTerm.ToLower();
 
-            List<CarViewModel> carViewModels = cars.Where(carViewModels => carViewModels.Brand.Contains(searchTerm) || carViewModels.Model.Contains(searchTerm))
+            var cars = await _context.Cars
+                .Where(c => c.Brand.ToLower().Contains(searchTerm) || c.Model.ToLower().Contains(searchTerm))
                 .Select(c => new CarViewModel(c.ID, c.Brand, c.Model, c.Description!, c.Year, c.Price))
-                .ToList();
+                .ToListAsync();
 
-            return View(carViewModels);
+            return View("List", cars); 
         }
 
     }
